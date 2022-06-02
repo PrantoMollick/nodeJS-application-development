@@ -1,0 +1,20 @@
+{
+  "name": "improved-development-workflow-and-debugging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrantoMollick/nodeJS-application-development.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrantoMollick/nodeJS-application-development/issues"
+  },
+  "homepage": "https://github.com/PrantoMollick/nodeJS-application-development#readme"
+}
