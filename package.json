@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/PrantoMollick/nodeJS-application-development/issues"
   },
-  "homepage": "https://github.com/PrantoMollick/nodeJS-application-development#readme"
+  "homepage": "https://github.com/PrantoMollick/nodeJS-application-development#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
 }
