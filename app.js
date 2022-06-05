@@ -12,7 +12,7 @@ const shopRoutes = require('./routes/shop');
 
 const app = express();
 
-const handlebars = exphbs.create({extname: '.hbs', layoutsDir: 'views'});
+const handlebars = exphbs.create({extname: '.hbs', layoutsDir: 'views/layouts'});
 app.engine('hbs', handlebars.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
