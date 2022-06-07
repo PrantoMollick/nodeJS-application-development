@@ -1,1 +1,44 @@
-[{"id":1,"title":"It Ends with Us: A Novel","imageUrl":"https://images-na.ssl-images-amazon.com/images/I/51zhNb8Ei4L._SX320_BO1,204,203,200_.jpg","description":"In this “brave and heartbreaking novel that digs its claws into you and doesn’t let go, long after you’ve finished it” (Anna Todd, New York Times bestselling author) from the #1 New York Times bestselling author of All Your Perfects, a workaholic with a too-good-to-be-true romance can’t stop thinking about her first love.","price":"11.99"},{"id":2,"title":"Ugly Love: A Novel","imageUrl":"https://images-na.ssl-images-amazon.com/images/I/41g9RfNVZBL._SX320_BO1,204,203,200_.jpg","description":"From Colleen Hoover, the #1 New York Times bestselling author of It Ends with Us, aheart-wrenching love story that proves attraction at first sight can be messy.\r\n","price":"11.99"},{"id":3,"title":"Crock-Pot Express Cookbook: Amazingly Tasty and Easy Recipes for the Busy Family","imageUrl":"https://m.media-amazon.com/images/I/51AcD6Mp0eL.jpg","description":"Crock-Pot has recently released its first slow cooker/pressure cooker. It’s called the Express Multi-Cooker, and it boasts 8 cooking programs and functions, dishwasher-safe parts, and the reliability of a nearly 50-year old brand. This cookbook gives you all the information you need to use the Crock-Pot effectively and safely, while also providing you with a giant resource of great recipes for every meal of the day.","price":"19.97"},{"title":"Node.js Web Development: Server-side web development made easy with Node 14 using practical examples, 5th Edition","imageUrl":"https://m.media-amazon.com/images/I/611uU+tf0SL._AC_UY327_FMwebp_QL65_.jpg","description":"Build scalable web applications using Node.js, Express.js, and the latest ECMAScript techniques, along with deploying applications with AWS and Docker with this updated fifth edition","price":"39","id":0.07796099928793954},{"title":"Beginning Node.js, Express & MongoDB Development","imageUrl":"https://images-na.ssl-images-amazon.com/images/I/418H3vYA2tL._SX404_BO1,204,203,200_.jpg","description":"n this book, we take you on a fun, hands-on and pragmatic journey to learning Node.js, Express and MongoDB development. You'll start building your first Node.js app within minutes. Every chapter is written in a bite-sized manner and straight to the point as I don't want to waste your time (and most certainly mine) on the content you don't need. In the end, you will have the skills to create a blog app and deploy it to the Internet.\r\n\r\n","price":"17.11","id":0.21930974145772164}]
+[
+  {
+    "id": "1",
+    "title": "It Ends with Us: A Novel",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51zhNb8Ei4L._SX320_BO1,204,203,200_.jpg",
+    "description": "In this “brave and heartbreaking novel that digs its claws into you and doesn’t let go, long after you’ve finished it” (Anna Todd, New York Times bestselling author) from the #1 New York Times bestselling author of All Your Perfects, a workaholic with a too-good-to-be-true romance can’t stop thinking about her first love.",
+    "price": "11.99"
+  },
+  {
+    "id": "2",
+    "title": "Ugly Love: A Novel",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/41g9RfNVZBL._SX320_BO1,204,203,200_.jpg",
+    "description": "From Colleen Hoover, the #1 New York Times bestselling author of It Ends with Us, aheart-wrenching love story that proves attraction at first sight can be messy.\r\n",
+    "price": "11.99"
+  },
+  {
+    "id": "3",
+    "title": "Crock-Pot Express Cookbook: Amazingly Tasty and Easy Recipes for the Busy Family",
+    "imageUrl": "https://m.media-amazon.com/images/I/51AcD6Mp0eL.jpg",
+    "description": "Crock-Pot has recently released its first slow cooker/pressure cooker. It’s called the Express Multi-Cooker, and it boasts 8 cooking programs and functions, dishwasher-safe parts, and the reliability of a nearly 50-year old brand. This cookbook gives you all the information you need to use the Crock-Pot effectively and safely, while also providing you with a giant resource of great recipes for every meal of the day.",
+    "price": "19.97"
+  },
+  {
+    "title": "Node.js Web Development: Server-side web development made easy with Node 14 using practical examples, 5th Edition",
+    "imageUrl": "https://m.media-amazon.com/images/I/611uU+tf0SL._AC_UY327_FMwebp_QL65_.jpg",
+    "description": "Build scalable web applications using Node.js, Express.js, and the latest ECMAScript techniques, along with deploying applications with AWS and Docker with this updated fifth edition",
+    "price": "39",
+    "id": "0.07796099928793954"
+  },
+  {
+    "title": "Beginning Node.js, Express & MongoDB Development",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/418H3vYA2tL._SX404_BO1,204,203,200_.jpg",
+    "description": "n this book, we take you on a fun, hands-on and pragmatic journey to learning Node.js, Express and MongoDB development. You'll start building your first Node.js app within minutes. Every chapter is written in a bite-sized manner and straight to the point as I don't want to waste your time (and most certainly mine) on the content you don't need. In the end, you will have the skills to create a blog app and deploy it to the Internet.\r\n\r\n",
+    "price": "17.11",
+    "id": "0.21930974145772164"
+  },
+  {
+    "title": "The Road to React: Your journey to master plain yet pragmatic React.js",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
+    "description": "In \"The Road to React\" you will learn about all the fundamentals of React.js with Hooks while building a full-blown React application step by step. While you create the React application, every chapter will introduce you to a new React key feature. However, there is more than only the fundamentals: The book dives into related topics (e.g. React with TypeScript, Testing, Performance Optimizations) and advanced feature implementations like client- and server-side searching. At the end of the book, you will have a fully working deployed React application.",
+    "price": "24.09",
+    "id": "0.767"
+  }
+]
