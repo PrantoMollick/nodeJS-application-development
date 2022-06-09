@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const randomstring = require('randomstring');
 
 const p = path.join(
   path.dirname(process.mainModule.filename),
@@ -19,20 +20,30 @@ const getProductFromFile = (cb) => {
 
 
 module.exports = class Products {
-  constructor(title, imageUrl, description, price) {
+  constructor(id, title, imageUrl, price, description) {
+    this.id = id;
     this.title = title;
     this.imageUrl = imageUrl; 
-    this.description = description; 
     this.price = price;
+    this.description = description; 
   }
 
   save() {
-    this.id = Math.random().toLocaleString();
     getProductFromFile((products) => {
-      products.push(this);
-      fs.writeFile(p, JSON.stringify(products), (error) => {
-        console.log(error);
-      });
+      if (this.id) {
+        const existingProductIndex = products.findIndex(prod => prod.id === this.id.trim());
+        const updateProduct = [...products];
+        updateProduct[existingProductIndex] = this;
+        fs.writeFile(p, JSON.stringify(updateProduct), (error) => {
+          console.log(error);
+        });
+      } else {
+        this.id = randomstring.generate(7);
+        products.push(this);
+        fs.writeFile(p, JSON.stringify(products), (error) => {
+          console.log(error);
+        });
+      }
     })
   }
 
@@ -42,8 +53,8 @@ module.exports = class Products {
 
   static findByOne(pId, cb) {
     getProductFromFile((products) => {
-      const prodId = `${pId.trim()}`
-      const prod = products.find(product => product.id === prodId);
+      const prod = products.find(product => product.id.trim() === pId.trim());
+      console.log(prod);
       cb(prod);
     })
   }
