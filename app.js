@@ -33,9 +33,11 @@ app.use(errorController.get404);
 sequelize
   .sync()
   .then((result) => {
-    app.listen(3000);
+    
   })
   .catch((error) => {
     console.log(error);
   });
+
+app.listen(process.env.PORT || 3000);
 
