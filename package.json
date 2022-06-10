@@ -28,6 +28,7 @@
     "express-handlebars": "^6.0.6",
     "mysql2": "^2.3.3",
     "pug": "^3.0.2",
-    "randomstring": "^1.2.2"
+    "randomstring": "^1.2.2",
+    "sequelize": "^6.20.1"
   }
 }
