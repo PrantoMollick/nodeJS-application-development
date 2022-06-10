@@ -1,34 +1,43 @@
 //node global moduel and package
-const path = require('path');
+const path = require("path");
 
 //3rd party package and framework
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 //local module of our app
-const sequelize = require('./util/database');
-const Product = require('./models/product');
-const User = require('./models/user');
+const sequelize = require("./util/database");
+const Product = require("./models/product");
+const User = require("./models/user");
 
 //create express app root instance
 const app = express();
 
 //set template engine
-app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set("view engine", "ejs");
+app.set("views", "views");
 
 //all routes importate here
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const errorController = require('./controllers/error');
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+const errorController = require("./controllers/error");
 
 //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 app.use(bodyParser.urlencoded({ extended: false }));
 //define the directory of public for static css and js files configaration
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+    User.findByPk(1)
+    .then((user) => { 
+       req.user = user;
+       next();
+    })
+    .catch(err => console.log(err));
+})
 
 //sub routes register on express app.
-app.use('/admin', adminRoutes);
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(errorController.get404);
 
@@ -38,13 +47,22 @@ Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
 
 sequelize
-  .sync({ force: true })
+  //.sync({ force: true })
+  .sync()
   .then((result) => {
-    
+    return User.findByPk(1);
+  })
+  .then((user) => {
+    if (!user) {
+      return User.create({ name: "max", email: "test@test.com" });
+    }
+    return user;
+  })
+  .then((user) => {
+    // console.log(user);
   })
   .catch((error) => {
     console.log(error);
   });
 
 app.listen(process.env.PORT || 3000);
-
