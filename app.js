@@ -20,10 +20,18 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const errorController = require('./controllers/error');
 
+db.execute('select * from products')
+  .then((result) => {
+    console.log(result[0]);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 app.use(bodyParser.urlencoded({ extended: false }));
 //define the directory of public for static css and js files configaration
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
 //sub routes register on express app.
 app.use('/admin', adminRoutes);
@@ -31,5 +39,3 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 app.listen(3000);
-
-
