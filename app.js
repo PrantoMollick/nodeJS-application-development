@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 //local module of our app
 const sequelize = require('./util/database');
+const Product = require('./models/product');
+const User = require('./models/user');
 
 //create express app root instance
 const app = express();
@@ -30,8 +32,13 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(errorController.get404);
 
+//user created this product and this cascade means the user delete this product will be delete also
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+//this is option to make it crlear one user has many product access
+User.hasMany(Product);
+
 sequelize
-  .sync()
+  .sync({ force: true })
   .then((result) => {
     
   })
