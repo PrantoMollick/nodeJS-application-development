@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 //local module of our app
-const db = require('./util/database');
+const sequelize = require('./util/database');
 
 //create express app root instance
 const app = express();
@@ -30,4 +30,12 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(errorController.get404);
 
-app.listen(3000);
+sequelize
+  .sync()
+  .then((result) => {
+    app.listen(3000);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
