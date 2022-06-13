@@ -5,11 +5,9 @@ const router = express.Router();
 const adminController = require('../controllers/admin');
 
 
-// /admin/add-product => Get request
 router.get('/add-product', adminController.getAddProduct);
 
-// /admin/products => Get request
-// router.get('/products', adminController.getProducts);
+router.get('/products', adminController.getProducts);
 
 // /admin/add-product => Post request
 router.post('/add-product', adminController.postAddProduct);
