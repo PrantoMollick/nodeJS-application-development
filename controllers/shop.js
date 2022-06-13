@@ -1,3 +1,4 @@
+const mongodb = require('mongodb');
 const Product = require("../models/product");
 // const Order = require("../models/product");
 
@@ -31,8 +32,7 @@ exports.getIndex = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
-  Product.findByPk(productId)
-    // Product.findAll({where: { id: productId}})
+  Product.findById(productId)
     .then((product) => {
       res.render("shop/product-detail", {
         product,
@@ -41,6 +41,16 @@ exports.getProduct = (req, res, next) => {
       });
     })
     .catch((error) => console.log(error));
+  // Product.findByPk(productId)
+  //   // Product.findAll({where: { id: productId}})
+  //   .then((product) => {
+  //     res.render("shop/product-detail", {
+  //       product,
+  //       pageTitle: product.title,
+  //       path: "/products",
+  //     });
+  //   })
+  //   .catch((error) => console.log(error));
 };
 
 
