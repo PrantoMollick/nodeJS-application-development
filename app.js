@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 //local module of our app
 const mongoConnect = require("./util/database").mongoConnect;
-mongoConnect();
+
 //create express app root instance
 const app = express();
 
@@ -17,7 +17,7 @@ app.set("views", "views");
 
 //all routes importate here
 const adminRoutes = require("./routes/admin");
-// const shopRoutes = require("./routes/shop");
+const shopRoutes = require("./routes/shop");
 const errorController = require("./controllers/error");
 
 //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
@@ -37,8 +37,9 @@ app.use((req, res, next) => {
 
 //sub routes register on express app.
 app.use("/admin", adminRoutes);
-// app.use(shopRoutes);
+app.use(shopRoutes);
 app.use(errorController.get404);
 
-
-app.listen(3000);
+mongoConnect(() => {
+    app.listen(3000);
+});
