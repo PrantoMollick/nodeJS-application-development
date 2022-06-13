@@ -15,15 +15,12 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   //another secuelize cool feature
-  req.user.createProduct({
-    title,
-    imageUrl,
-    price,
-    description,
-  })
+  const product = new Product(title, price, description, imageUrl);
+  product
+    .save()
     .then((result) => {
-      console.log('created Product');
-      return res.redirect('/admin/products');
+      console.log("created Product");
+      return res.redirect("/admin/products");
     })
     .catch((error) => {
       console.log(error);

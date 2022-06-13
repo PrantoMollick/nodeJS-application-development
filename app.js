@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 //local module of our app
 const mongoConnect = require("./util/database").mongoConnect;
-
+mongoConnect();
 //create express app root instance
 const app = express();
 
@@ -40,5 +40,5 @@ app.use("/admin", adminRoutes);
 // app.use(shopRoutes);
 app.use(errorController.get404);
 
-mongoConnect();
+
 app.listen(3000);
