@@ -6,7 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 //local module of our app
-
+const mongoConnect = require("./util/database").mongoConnect;
 
 //create express app root instance
 const app = express();
@@ -32,6 +32,7 @@ app.use((req, res, next) => {
     //    next();
     // })
     // .catch(err => console.log(err));
+    next();
 })
 
 //sub routes register on express app.
@@ -39,5 +40,5 @@ app.use("/admin", adminRoutes);
 // app.use(shopRoutes);
 app.use(errorController.get404);
 
-const mongoConnect = require("./util/database").mongoConnect;
+mongoConnect();
 app.listen(3000);
