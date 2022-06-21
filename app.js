@@ -4,6 +4,8 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 
 // const User = require('./models/user');
 
@@ -33,9 +35,11 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 
+
+const databaseURI = process.env.DATABASE_URI;
 mongoose
   .connect(
-    "mongodb+srv://kFOgd8E5Pywzpk4K:qDgaIjFirHfHBPdy@cluster0.dc21ept.mongodb.net/shop?retryWrites=true&w=majority"
+    databaseURI
   )
   .catch((err) => console.log(err));
 
