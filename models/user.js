@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const Order = require('./orders');
+
 const userSchema = new Schema({
   name: {
     type: String,
@@ -42,6 +44,28 @@ userSchema.methods.addToCart = function(product) {
   this.cart = updatedCart;
   return this.save();
 };
+
+
+userSchema.methods.removeFromCart = function (prodId) {
+  const updateCartItems = this.cart.items.filter(
+    (item) => item.productId.toString() !== prodId.toString()
+  );
+
+  this.cart.items = updateCartItems;
+  return this.save();
+};
+
+
+userSchema.methods.addOrder = function(orderdetails) {
+  const order = new Order({
+    name: orderdetails.name, 
+    userId: orderdetails._id,
+    orders: orderdetails.orders
+  })
+  order.save();
+  this.cart.items = [];
+  return this.save();
+}
 
 
 module.exports = mongoose.model('User', userSchema);

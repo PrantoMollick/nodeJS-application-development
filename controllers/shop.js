@@ -75,7 +75,7 @@ exports.postCart = (req, res, next) => {
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   req.user
-    .deleteItemFromCart(prodId)
+    .removeFromCart(prodId)
     .then((result) => {
       res.redirect("/cart");
     })
@@ -83,10 +83,31 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
-  let fetchedCart;
+  let newOrder;
   req.user
-    .addOrder()
-    .then((result) => {
+    .populate("cart.items.productId")
+    .then((user) => {
+      newOrder = {
+        _id: user._id,
+        name: user.name,
+        orders: user.cart.items.map((item) => {
+          return {
+            productId: item.productId._id,
+            title: item.productId.title,
+            price: item.productId.price,
+            description: item.productId.description,
+            imageUrl: item.productId.imageUrl,
+            quantity: item.quantity,
+          };
+        }),
+      };
+      return newOrder
+    })
+    .then((order) => {
+      req.user.addOrder(order);
+    })
+    .then(result => {
+      console.log(result)
       res.redirect("/orders");
     })
     .catch((err) => console.log(err));
