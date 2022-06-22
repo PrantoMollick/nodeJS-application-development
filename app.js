@@ -56,8 +56,5 @@ app.use(shopRoutes);
 app.use(authRoutes);
 app.use(errorController.get404);
 
-
-
-
 mongoose.connect(databaseURI).catch((err) => console.log(err));
 app.listen(3000);
