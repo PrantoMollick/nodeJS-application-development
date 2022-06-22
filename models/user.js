@@ -56,6 +56,13 @@ userSchema.methods.removeFromCart = function (prodId) {
 };
 
 
+userSchema.methods.clearCart = function() {
+  this.cart = { items: [] };
+  return this.save()
+}
+
+
+
 // userSchema.methods.addOrder = function (orderdetails) {
 //   Order.findOneAndUpdate(
 //     { userId: orderdetails._id },
