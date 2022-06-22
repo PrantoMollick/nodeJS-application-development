@@ -56,29 +56,29 @@ userSchema.methods.removeFromCart = function (prodId) {
 };
 
 
-userSchema.methods.addOrder = function (orderdetails) {
-  Order.findOneAndUpdate(
-    { userId: orderdetails._id },
-    { $push: { orders: [...orderdetails.orders] } },
-    { new: true }
-  )
-    .then((orders) => {
-      if (orders) {
-        this.cart.items = [];
-        return this.save();
-      } else {
-        const order = new Order({
-          name: orderdetails.name,
-          userId: orderdetails._id,
-          orders: orderdetails.orders,
-        });
-        order.save();
-        this.cart.items = [];
-        return this.save();
-      }
-    })
-    .catch((err) => console.log(err));
-};
+// userSchema.methods.addOrder = function (orderdetails) {
+//   Order.findOneAndUpdate(
+//     { userId: orderdetails._id },
+//     { $push: { orders: [...orderdetails.orders] } },
+//     { new: true }
+//   )
+//     .then((orders) => {
+//       if (orders) {
+//         this.cart.items = [];
+//         return this.save();
+//       } else {
+//         const order = new Order({
+//           name: orderdetails.name,
+//           userId: orderdetails._id,
+//           orders: orderdetails.orders,
+//         });
+//         order.save();
+//         this.cart.items = [];
+//         return this.save();
+//       }
+//     })
+//     .catch((err) => console.log(err));
+// };
 
 
 module.exports = mongoose.model('User', userSchema);

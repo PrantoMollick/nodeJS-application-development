@@ -1,5 +1,5 @@
 const Product = require("../models/product");
-// const Order = require("../models/product");
+const Order = require("../models/orders");
 
 exports.getProducts = (req, res, next) => {
   Product.find()
@@ -83,35 +83,50 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
-  let newOrder;
-  req.user
-    .populate("cart.items.productId")
-    .then((user) => {
-      newOrder = {
-        _id: user._id,
-        name: user.name,
-        orders: user.cart.items.map((item) => {
-          return {
-            productId: item.productId._id,
-            title: item.productId.title,
-            price: item.productId.price,
-            description: item.productId.description,
-            imageUrl: item.productId.imageUrl,
-            quantity: item.quantity,
-          };
-        }),
-      };
-      return newOrder
+  req.user.populate("cart.items.productId").then((user) => {
+    const products = user.cart.items.map(i => {
+      return {quantity: i.quantity, product: i.productId };
     })
-    .then((order) => {
-      // console.log(order);
-      return req.user.addOrder(order);
+    const order = new Order({
+      user: {
+        name: req.user.name, 
+        userId: req.user
+      }, 
+      products: products
     })
-    .then(result => {
-      // console.log(result)
-      res.redirect("/orders");
-    })
-    .catch((err) => console.log(err));
+    return order.save();
+  })
+  .then(result => {
+    // console.log(result)
+    res.redirect("/orders");
+  })
+  .catch((err) => console.log(err));
+
+  // let newOrder;
+  // req.user
+  //   .populate("cart.items.productId")
+  //   .then((user) => {
+  //     newOrder = {
+  //       _id: user._id,
+  //       name: user.name,
+  //       orders: user.cart.items.map((item) => {
+  //         return {
+  //           productId: item.productId._id,
+  //           title: item.productId.title,
+  //           price: item.productId.price,
+  //           description: item.productId.description,
+  //           imageUrl: item.productId.imageUrl,
+  //           quantity: item.quantity,
+  //         };
+  //       }),
+  //     };
+  //     return newOrder
+  //   })
+  //   .then((order) => {
+  //     // console.log(order);
+  //     return req.user.addOrder(order);
+  //   })
+
 };
 
 exports.getOrders = (req, res, next) => {
