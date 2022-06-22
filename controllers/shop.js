@@ -67,7 +67,7 @@ exports.postCart = (req, res, next) => {
     })
     .then((result) => {
       res.redirect('/cart')
-      console.log(result);
+      // console.log(result);
     })
     .catch((err) => console.log(err));
 };
@@ -104,10 +104,11 @@ exports.postOrder = (req, res, next) => {
       return newOrder
     })
     .then((order) => {
-      req.user.addOrder(order);
+      // console.log(order);
+      return req.user.addOrder(order);
     })
     .then(result => {
-      console.log(result)
+      // console.log(result)
       res.redirect("/orders");
     })
     .catch((err) => console.log(err));
