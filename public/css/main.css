@@ -244,8 +244,8 @@ form {
 
 .user-message--error {
   border-color: red;
-  background-color: lightcoral;
-  color: #f0ffff;
+  background-color: #ff8989;
+  color: #ff0000;
 }
 
 @media (min-width: 768px) {
