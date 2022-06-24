@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -6,6 +7,7 @@ require('dotenv').config();
 const SENDGRID_API_KEY = process.env.SENDGRID_API;
 
 const User = require("../models/user");
+const user = require('../models/user');
 
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth: {
@@ -114,11 +116,51 @@ exports.postLogout = (req, res, next) => {
 exports.getReset = (req, res, next) => {
   let messageFlash = req.flash("error");
   message = messageFlash.length > 0 ? messageFlash[0] : null;
-  
+
   res.render('auth/reset', {
     path: "/reset",
     pageTitle: "Reset Password",
     isAuthenticated: false,
     errorMessage: message,
   })
+};
+
+
+exports.postReset = (req, res, next) => {
+  let token;
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      return res.redirect('/reset');
+    }
+    token = buffer.toString('hex');
+  });
+
+  User
+    .findOne({ email: req.body.email })
+    .then((user) => {
+      if(!user) {
+        req.flash('error', 'No account with that email found.');
+        return res.redirect('/reset');
+      }
+      user.resetToken = token;
+      user.resetTokenExpiration = Date.now() + 3600000; 
+      return user.save();
+    })
+    .then(result => {
+      res.redirect('/');
+      return transporter.sendMail({
+        to: req.body.email,
+        from: 'em3874@prantomollick.com', 
+        subject: 'Password reset',
+        html: `
+          <p>You requested a password reset</p>
+          <p>Click this <a href="http://localhost:3000/reset/${token}">Link</a></p>
+        `,
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
 };
