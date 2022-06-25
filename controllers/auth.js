@@ -40,7 +40,8 @@ exports.getSignup = (req, res, next) => {
       email: '',
       password: '',
       confirmPassword: ''
-    }
+    }, 
+    validationErrors: []
   });
 };
 
@@ -91,6 +92,7 @@ exports.postSignup = (req, res, next) => {
   const password = req.body.password;
 
   const errors = validationResult(req);
+  console.log(errors);
   if (!errors.isEmpty()) {
     return res.status(422).render("auth/signup", {
       path: "/signup",
@@ -101,7 +103,8 @@ exports.postSignup = (req, res, next) => {
         email: email, 
         password: password, 
         confirmPassword: req.body.confirmPassword
-      }
+      }, 
+      validationErrors: errors.array()
     });
   }
   return bcrypt
