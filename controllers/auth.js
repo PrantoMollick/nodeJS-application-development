@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const { validationResult } = require('express-validator/check')
 
 require('dotenv').config();
 const SENDGRID_API_KEY = process.env.SENDGRID_API;
@@ -75,6 +76,17 @@ exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const confirmedPassword = req.body.confirmPassword;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    return res.status(422).render("auth/signup", {
+      path: "/signup",
+      pageTitle: "Signup",
+      isAuthenticated: false,
+      errorMessage: errors.array(),
+    });
+  }
+
   User.findOne({ email: email })
     .then((userDoc) => {
       if (userDoc) {
