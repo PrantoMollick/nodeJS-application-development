@@ -60,8 +60,8 @@ const errorController = require("./controllers/error");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(upload);
-// app.use(upload.single("image"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "images")));
 app.use(
   session({
     secret: "my-secret",

@@ -53,7 +53,7 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
-  const imageUrl = image.path;
+  const imageUrl = image.filename;
 
   const product = new Product({
     title,
@@ -137,7 +137,7 @@ exports.postEditProduct = (req, res, next) => {
       product.price = updatedPrice;
       product.description = updatedDescription;
       if (image) {
-        product.imageUrl = image.path;
+        product.imageUrl = image.filename;
       }
       return product.save().then((result) => {
         console.log("Updated Product");
