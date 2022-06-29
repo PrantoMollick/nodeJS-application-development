@@ -1,4 +1,4 @@
 const path = require('path');
-// console.log(path.dirname(process.mainModule.filename));
+console.log(path.join(path.resolve(), 'images'));
 
 module.exports = path.dirname(process.mainModule.filename);
